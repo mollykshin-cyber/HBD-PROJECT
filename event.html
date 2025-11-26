@@ -401,7 +401,12 @@
                                         )}
                                     </div>
                                     <div className="text-center font-cute text-brown-warm text-xl">
-                                        {!boxState[i] ? '클릭해서 열어보세요!' : ''}
+                                        {!boxState[i] ? '클릭해서 열어보세요!' : (
+                                            <div className="flex flex-col items-center">
+                                                <p className="font-bold text-lg">{gameRewards[i].text}</p>
+                                                <p className="text-sm text-gray-600 mt-1">{gameRewards[i].sub}</p>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </div>
