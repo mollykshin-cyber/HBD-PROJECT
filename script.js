@@ -11,49 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Mobile Navigation ---
-    const nav = document.querySelector('nav');
-    if (nav) {
-        // Create hamburger button
-        const mobileMenuToggle = document.createElement('button');
-        mobileMenuToggle.className = 'mobile-menu-toggle';
-        mobileMenuToggle.innerHTML = '<span></span><span></span><span></span>';
-        mobileMenuToggle.setAttribute('aria-label', 'Toggle Menu');
-
-        // Insert the toggle button after the logo
-        const logo = nav.querySelector('.logo');
-        if (logo) {
-            logo.insertAdjacentElement('afterend', mobileMenuToggle);
-        }
-
-        // Get nav links
-        const navLinksContainer = nav.querySelector('.nav-links');
-
-        // Toggle menu on button click
-        mobileMenuToggle.addEventListener('click', function () {
-            this.classList.toggle('active');
-            navLinksContainer.classList.toggle('active');
-            document.body.style.overflow = navLinksContainer.classList.contains('active') ? 'hidden' : '';
-        });
-
-        // Close menu when clicking on a link
-        const links = navLinksContainer.querySelectorAll('a');
-        links.forEach(link => {
-            link.addEventListener('click', function () {
-                mobileMenuToggle.classList.remove('active');
-                navLinksContainer.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', function (event) {
-            if (!nav.contains(event.target)) {
-                mobileMenuToggle.classList.remove('active');
-                navLinksContainer.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-    }
+    // Handled by mobile-nav.js
 
     // --- Animations ---
     const observerOptions = { threshold: 0.1 };

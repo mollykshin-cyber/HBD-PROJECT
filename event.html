@@ -392,7 +392,7 @@
                 const REWARDS_SOURCE = [
                     { type: 'BAD', text: '꽝ㅋ▽ㅋ', sub: '하지만 별님들의 사랑은 당첨~!', mediaType: 'video', src: 'assets/bad_reward.mp4' },
                     { type: 'GOOD', text: '♥️햅삐영숙데이♥️', sub: '357살까지 만수무강 하세요★', mediaType: 'image', src: 'assets/reward2.jpg' },
-                    { type: 'VIDEO', text: '뮤지컬 신의 등장✨', sub: '뮤지컬 신의 탄생 신화를 야심차게 만들어 보고자 했으나 실패...', mediaType: 'video', src: 'assets/ai_reward.mp4' }
+                    { type: 'VIDEO', text: '뮤지컬 신의 등장✨', sub: '뮤지컬 신의 탄생 신화를 야심차게 만들어 보고자 했으나 실패... (ft. AI)', mediaType: 'video', src: 'assets/ai_reward.mp4' }
                 ];
                 setGameRewards([...REWARDS_SOURCE].sort(() => Math.random() - 0.5));
             }, []);
@@ -528,7 +528,7 @@
                                 </div>
                                 <button onClick=${openGiftPopup} className="relative px-8 py-4 md:px-12 md:py-6 bg-gradient-to-r from-pastel-peach to-pastel-pink font-bold text-2xl md:text-3xl rounded-full shadow-lg border-4 border-white hover:scale-105 transition-transform animate-pulse">
                                     <span className="flex items-center gap-2 font-cute text-brown-warm">
-                                        <${Gift} size=${24} className="md:w-8 md:h-8" />
+                                        🎁
                                         행운의 선물
                                     </span>
                                 </button>
