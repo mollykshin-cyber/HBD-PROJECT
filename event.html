@@ -61,6 +61,8 @@
             /* Pastel Pink with 50% opacity */
             background-size: 50px 50px;
             background-position: 0 0, 25px 25px;
+            position: relative;
+            z-index: 1;
         }
 
         .polaroid {
@@ -321,9 +323,9 @@
 
             useEffect(() => {
                 const REWARDS_SOURCE = [
-                    { type: 'BAD', text: '신나가 준비함..뭔지모름..', sub: '하지만 팬들의 사랑은 당첨입니다!', mediaType: 'image', src: 'assets/bad_reward.jpg' },
-                    { type: 'GOOD', text: '♥햅삐영숙데이♥', sub: '소원을 빌어보세요!', mediaType: 'image', src: 'assets/reward2.jpg' },
-                    { type: 'VIDEO', text: '뮤지컬 신의 등장', sub: '뮤지컬 신의 탄생 신화를 야심차게 만들어 보고자 했으나 실패...', mediaType: 'video', src: 'assets/ai_reward.mp4' }
+                    { type: 'BAD', text: '꽝ㅋㅋ', sub: '하지만 별님들의 사랑은 당첨~!', mediaType: 'image', src: 'assets/bad_reward.jpg' },
+                    { type: 'GOOD', text: '♥햅삐영숙데이♥', sub: '357살까지 만수무강 하세요', mediaType: 'image', src: 'assets/reward2.jpg' },
+                    { type: 'VIDEO', text: '뮤지컬 신의 ', sub: '뮤지컬 신의 탄생신화를 야심차게 만들어 보고자 했으나 실패...', mediaType: 'video', src: 'assets/ai_reward.mp4' }
                 ];
                 setGameRewards([...REWARDS_SOURCE].sort(() => Math.random() - 0.5));
             }, []);
@@ -352,31 +354,51 @@
                                     ) : (
                                         selectedReward.src ? <img src={selectedReward.src} alt={selectedReward.text} className="w-full h-full max-h-[60vh] object-contain rounded-lg" /> :
                                             <div className="w-full h-full flex items-center justify-center"><span className="text-6xl">🎁</span></div>
-                                            <p className="text-xl text-pink-400 font-cute mt-3">♥ 두근두근 ♥</p>
-                                        </div>
-                                ) : (
-                                <div className="text-center">
-                                    <div className="text-5xl mb-4">{gameRewards[i]?.type === 'BAD' ? '🤪' : (gameRewards[i]?.type === 'VIDEO' ? '🎬' : '🍰')}</div>
-                                    <p className="font-bold font-cute text-2xl text-gray-500">{gameRewards[i]?.text.split('!')[0]}!</p>
+                                    )}
+                                    {selectedReward.src && (
+                                        <p className="text-xl text-pink-400 font-cute mt-3">♥ 두근두근 ♥</p>
+                                    )}
+                                </div>
+                                <div className="text-center mt-4">
+                                    <div className="text-5xl mb-4">{selectedReward.type === 'BAD' ? '🤪' : (selectedReward.type === 'VIDEO' ? '🎬' : '🍰')}</div>
+                                    <p className="font-bold font-cute text-2xl text-gray-500">{selectedReward.text.split('!')[0]}!</p>
                                     <p className="text-base text-pink-400 mt-3 font-bold border-2 border-dashed border-pink-300 rounded-full px-4 py-2 inline-block">다시 보기</p>
                                 </div>
-                                    )}
-                            </div>
-                            <div className="mt-3 text-center font-cute text-brown-warm text-xl">
-                                {!boxState[i] ? '클릭해서 열어보세요!' : ''}
                             </div>
                         </div>
-                        </div>
-            ))
-        }
-                </div >
-                    </div >
-                </section >
+                    )}
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+                        {[0, 1, 2].map((i) => (
+                            <div key={i} className="relative group cursor-pointer" onClick={() => handleBoxClick(i)}>
+                                <div className={`polaroid transition-all duration-500 transform ${boxState[i] ? 'rotate-0 scale-105' : 'hover:rotate-2 hover:scale-105'}`}>
+                                    <div className="washi-tape mb-4"></div>
+                                    <div className="aspect-square bg-gray-100 mb-4 overflow-hidden rounded-sm relative">
+                                        {boxState[i] ? (
+                                            <div className="w-full h-full flex items-center justify-center bg-pastel-pink/20">
+                                                <span className="text-6xl animate-bounce">
+                                                    {gameRewards[i]?.type === 'BAD' ? '🤪' : (gameRewards[i]?.type === 'VIDEO' ? '🎬' : '🍰')}
+                                                </span>
+                                            </div>
+                                        ) : (
+                                            <div className="w-full h-full flex items-center justify-center bg-pastel-cream">
+                                                <Package size={64} className="text-pastel-pink animate-pulse" />
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className="text-center font-cute text-brown-warm text-xl">
+                                        {!boxState[i] ? '클릭해서 열어보세요!' : ''}
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
             );
         };
 
         const BackgroundDecorations = () => (
-            <div className="absolute inset-0 pointer-events-none overflow-hidden h-full w-full">
+            <div className="absolute inset-0 pointer-events-none overflow-hidden h-full w-full z-0">
                 <div className="absolute top-20 left-10 text-4xl opacity-30 animate-float">🎈</div>
                 <div className="absolute top-40 right-20 text-5xl opacity-30 animate-float-delayed">✨</div>
                 <div className="absolute bottom-1/4 left-20 text-6xl opacity-20 rotate-12 animate-float">🎂</div>
@@ -443,7 +465,7 @@
 
                     <section className="scrapbook-bg py-10 md:py-20 px-4 text-center relative min-h-screen flex flex-col justify-center">
                         <BackgroundDecorations />
-                        <div className="relative z-10 max-w-3xl mx-auto">
+                        <div className="relative z-20 max-w-3xl mx-auto">
                             <div className="inline-block px-6 py-3 md:px-10 md:py-4 rounded-full bg-gradient-to-r from-pastel-peach to-pastel-pink mb-6 shadow-md border-2 border-dashed border-orange-300 text-xl md:text-3xl font-cute">
                                 🎂 오늘은 마마님의 날! 🎂
                             </div>
