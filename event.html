@@ -521,12 +521,18 @@
                                 <div className="absolute -bottom-3 -right-3 text-3xl md:text-4xl">🎁</div>
                             </div>
 
-                            <button onClick=${openGiftPopup} className="relative px-8 py-4 md:px-12 md:py-6 bg-gradient-to-r from-pastel-peach to-pastel-pink font-bold text-2xl md:text-3xl rounded-full shadow-lg border-4 border-white hover:scale-105 transition-transform">
-                                <span className="flex items-center gap-2 font-cute text-brown-warm">
-                                    <${Gift} size=${24} className="md:w-8 md:h-8" />
-                                    행운의 선물
-                                </span>
-                            </button>
+                            <div className="relative inline-block">
+                                <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-white px-4 py-2 rounded-xl shadow-lg border-2 border-pastel-pink animate-bounce whitespace-nowrap z-10">
+                                    <span className="font-cute text-brown-warm text-lg">👇 눌러보세요!</span>
+                                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white border-b-2 border-r-2 border-pastel-pink rotate-45"></div>
+                                </div>
+                                <button onClick=${openGiftPopup} className="relative px-8 py-4 md:px-12 md:py-6 bg-gradient-to-r from-pastel-peach to-pastel-pink font-bold text-2xl md:text-3xl rounded-full shadow-lg border-4 border-white hover:scale-105 transition-transform animate-pulse">
+                                    <span className="flex items-center gap-2 font-cute text-brown-warm">
+                                        <${Gift} size=${24} className="md:w-8 md:h-8" />
+                                        행운의 선물
+                                    </span>
+                                </button>
+                            </div>
                         </div>
                     </section>
                 </div>
