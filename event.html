@@ -10,6 +10,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Jua&family=Gowun+Batang:wght@400;700&family=Black+Han+Sans&family=Pacifico&family=Gaegu:wght@400;700&display=swap"
         rel="stylesheet">
+    <link rel="preload" href="assets/bad_reward.mp4" as="video" type="video/mp4">
+    <link rel="preload" href="assets/ai_reward.mp4" as="video" type="video/mp4">
     <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/htm@3.1.1/dist/htm.umd.js" crossorigin></script>
@@ -411,7 +413,7 @@
 
                 setTimeout(() => {
                     setSelectedReward(gameRewards[i]);
-                }, 800);
+                }, 300);
 
                 // Confetti effect
                 for (let k = 0; k < 50; k++) {
@@ -436,7 +438,7 @@
                                 </button>
                                 <div className="relative bg-gradient-to-br from-pastel-peach to-pastel-pink flex items-center justify-center min-h-[300px] md:min-h-[400px] rounded-lg">
                                     ${selectedReward.mediaType === 'video' ? html`
-                                        <video src=${selectedReward.src} controls autoPlay className="w-full h-full max-h-[60vh] object-contain rounded-lg" />
+                                        <video src=${selectedReward.src} controls autoPlay muted playsInline className="w-full h-full max-h-[60vh] object-contain rounded-lg" />
                                     ` : (
                         selectedReward.src ? html`<img src=${selectedReward.src} alt=${selectedReward.text} className="w-full h-full max-h-[60vh] object-contain rounded-lg" />` :
                             html`<div className="w-full h-full flex items-center justify-center"><span className="text-6xl">🎁</span></div>`
