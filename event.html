@@ -355,13 +355,14 @@
                                         selectedReward.src ? <img src={selectedReward.src} alt={selectedReward.text} className="w-full h-full max-h-[60vh] object-contain rounded-lg" /> :
                                             <div className="w-full h-full flex items-center justify-center"><span className="text-6xl">🎁</span></div>
                                     )}
-                                    {selectedReward.src && (
-                                        <p className="text-xl text-pink-400 font-cute mt-3">♥ 두근두근 ♥</p>
-                                    )}
+                                    {/* Removed persistent "두근두근" text */}
                                 </div>
                                 <div className="text-center mt-4">
                                     <div className="text-5xl mb-4">{selectedReward.type === 'BAD' ? '🤪' : (selectedReward.type === 'VIDEO' ? '🎬' : '🍰')}</div>
                                     <p className="font-bold font-cute text-2xl text-gray-500">{selectedReward.text.split('!')[0]}!</p>
+                                    {selectedReward.sub && (
+                                        <p className="text-lg text-gray-600 font-cute mt-2">{selectedReward.sub}</p>
+                                    )}
                                     <p className="text-base text-pink-400 mt-3 font-bold border-2 border-dashed border-pink-300 rounded-full px-4 py-2 inline-block">다시 보기</p>
                                 </div>
                             </div>
