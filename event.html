@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event | Shin Young-sook</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mobile-nav.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Jua&family=Gowun+Batang:wght@400;700&family=Black+Han+Sans&family=Pacifico&family=Gaegu:wght@400;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pastel: {
+                            pink: '#FFD1DC',
+                            peach: '#FFDAB9',
+                            mint: '#B5EAD7',
+                            lavender: '#E6E6FA',
+                            cream: '#FFF8DC',
+                        },
+                        brown: {
+                            warm: '#8B7355',
+                        }
+                    },
+                    fontFamily: {
+                        cute: ['"Jua"', 'sans-serif'],
+                        body: ['"Gowun Dodum"', 'sans-serif'],
+                        serif: ['"Gowun Batang"', 'serif'],
+                        blackhan: ['"Black Han Sans"', 'sans-serif'],
+                        cursive: ['"Pacifico"', 'cursive'],
+                        hand: ['"Gaegu"', 'cursive'],
+                        peace: ['"PyeongChangPeace-Bold"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @font-face {
+            font-family: 'PyeongChangPeace-Bold';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        .scrapbook-bg {
+            background-color: #FFFAF0;
+            /* Floral White (less yellow than Cornsilk) */
+            background-image:
+                radial-gradient(rgba(230, 230, 250, 0.5) 20%, transparent 20%),
+                /* Lavender with 50% opacity */
+                radial-gradient(rgba(255, 209, 220, 0.5) 20%, transparent 20%);
+            /* Pastel Pink with 50% opacity */
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px;
+        }
+
+        .polaroid {
+            background: white;
+            padding: 1rem;
+            padding-bottom: 4rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+            transform: rotate(-2deg);
+        }
+
+        .polaroid:nth-child(even) {
+            transform: rotate(2deg);
+        }
+
+        .washi-tape {
+            position: relative;
+        }
+
+        .washi-tape::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 20px;
+            background: repeating-linear-gradient(45deg,
+                    #FFB6C1,
+                    #FFB6C1 10px,
+                    #FFC0CB 10px,
+                    #FFC0CB 20px);
+            opacity: 0.7;
+            border-radius: 2px;
+        }
+
+        .paper-cut {
+            background: white;
+            box-shadow:
+                2px 2px 0 rgba(139, 115, 85, 0.1),
+                4px 4px 0 rgba(139, 115, 85, 0.05);
+        }
+
+        .note {
+            background: #FFFACD;
+            border-left: 4px solid #FFD700;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            transform: rotate(-1deg);
+        }
+
+        @keyframes celebrate {
+
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+            }
+
+            25% {
+                transform: scale(1.1) rotate(-5deg);
+            }
+
+            75% {
+                transform: scale(1.1) rotate(5deg);
+            }
+        }
+
+        .celebration-title {
+            font-family: 'Black Han Sans', sans-serif;
+            animation: celebrate 2s ease-in-out infinite;
+            background: linear-gradient(45deg, #FF1493, #FFD700, #00BFFF);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: none !important;
+            -webkit-text-stroke: 0.5px #8B7355;
+            paint-order: stroke fill;
+        }
+
+        .celebration-title.paused {
+            animation-play-state: paused;
+        }
+
+        /* Global pause class */
+        .animations-paused * {
+            animation-play-state: paused !important;
+        }
+
+        .subtitle-highlight {
+            background: linear-gradient(120deg, #FFD1DC 0%, #FFD1DC 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+            background-position: 0 88%;
+            padding: 0 5px;
+            font-family: 'Jua', sans-serif;
+        }
+
+        .confetti {
+            position: fixed;
+            top: -20px;
+            width: 12px;
+            height: 12px;
+            animation: confetti-fall 4s linear forwards;
+            z-index: 99999;
+            pointer-events: none;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(110vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Floating Animation for background elements */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .animate-float-delayed {
+            animation: float 8s ease-in-out infinite;
+            animation-delay: 2s;
+        }
+
+        .animate-float-slow {
+            animation: float 10s ease-in-out infinite;
+            animation-delay: 1s;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">SHIN YOUNG SOOK</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="schedule.html">Schedule</a></li>
+                    <li><a href="articles.html">Articles</a></li>
+                    <li><a href="event.html" class="active">Event</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="root"></main>
+
+    <script src="script.js"></script>
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const IconBase = ({ children, size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                {children}
+            </svg>
+        );
+
+        const Gift = (props) => <IconBase {...props}><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></IconBase>;
+        const Package = (props) => <IconBase {...props}><path d="M16.5 9.4 7.5 4.21" /><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" /><polyline points="3.27 6.96 12 12.01 20.73 6.96" /><line x1="12" y1="22.08" x2="12" y2="12" /></IconBase>;
+        const Heart = (props) => <IconBase {...props}><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></IconBase>;
+        const X = (props) => <IconBase {...props}><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></IconBase>;
+
+        const CELEB_DATA = {
+            name: "신영숙",
+            heroTitle: "HAPPY YOUNGSOOK DAY",
+            heroSubtitle: "뮤지컬의 신, 신영숙 배우님의 생일을 축하합니다!",
+            mainMessage: "세상이 더 아름답게 느껴지는 마마님이 태어나신 날!\n생일을 축하합니다.\n마마님의 노래가 세상을 밝히는 만큼\n세상에서 가장 행복한 주인공이 되시길 바랍니다.",
+        };
+
+        const GiftGameSection = () => {
+            const [boxState, setBoxState] = useState([false, false, false]);
+            const [gameRewards, setGameRewards] = useState([]);
+            const [selectedReward, setSelectedReward] = useState(null);
+
+            useEffect(() => {
+                const REWARDS_SOURCE = [
+                    { type: 'BAD', text: '신나가 준비함..뭔지모름..', sub: '하지만 팬들의 사랑은 당첨입니다!', mediaType: 'image', src: 'assets/bad_reward.jpg' },
+                    { type: 'GOOD', text: '♥햅삐영숙데이♥', sub: '소원을 빌어보세요!', mediaType: 'image', src: 'assets/reward2.jpg' },
+                    { type: 'VIDEO', text: '뮤지컬 신의 등장', sub: '뮤지컬 신의 탄생 신화를 야심차게 만들어 보고자 했으나 실패...', mediaType: 'video', src: 'assets/ai_reward.mp4' }
+                ];
+                setGameRewards([...REWARDS_SOURCE].sort(() => Math.random() - 0.5));
+            }, []);
+
+            const handleBoxClick = (index) => {
+                if (!boxState[index]) {
+                    const newBoxState = [...boxState];
+                    newBoxState[index] = true;
+                    setBoxState(newBoxState);
+                }
+                setSelectedReward(gameRewards[index]);
+            };
+
+            return (
+                <section className="py-16 max-w-6xl mx-auto my-12 px-4">
+                    {selectedReward && (
+                        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" onClick={() => setSelectedReward(null)}>
+                            <div className="polaroid max-w-2xl w-full" onClick={e => e.stopPropagation()}>
+                                <button onClick={() => setSelectedReward(null)} className="absolute top-4 right-4 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100">
+                                    <X size={24} className="text-brown-warm" />
+                                </button>
+                                <div className="relative bg-gradient-to-br from-pastel-peach to-pastel-pink flex items-center justify-center min-h-[300px] md:min-h-[400px] rounded-lg">
+                                    {selectedReward.mediaType === 'video' ? (
+                                        selectedReward.src ? <video src={selectedReward.src} controls autoPlay className="w-full h-full max-h-[60vh] object-contain rounded-lg" /> :
+                                            <div className="text-center p-4"><span className="text-6xl block mb-4">🎬</span><p className="text-xl font-cute">영상이 준비 중입니다.</p></div>
+                                    ) : (
+                                        selectedReward.src ? <img src={selectedReward.src} alt={selectedReward.text} className="w-full h-full max-h-[60vh] object-contain rounded-lg" /> :
+                                            <div className="w-full h-full flex items-center justify-center"><span className="text-6xl">🎁</span></div>
+                                            <p className="text-xl text-pink-400 font-cute mt-3">♥ 두근두근 ♥</p>
+                                        </div>
+                                ) : (
+                                <div className="text-center">
+                                    <div className="text-5xl mb-4">{gameRewards[i]?.type === 'BAD' ? '🤪' : (gameRewards[i]?.type === 'VIDEO' ? '🎬' : '🍰')}</div>
+                                    <p className="font-bold font-cute text-2xl text-gray-500">{gameRewards[i]?.text.split('!')[0]}!</p>
+                                    <p className="text-base text-pink-400 mt-3 font-bold border-2 border-dashed border-pink-300 rounded-full px-4 py-2 inline-block">다시 보기</p>
+                                </div>
+                                    )}
+                            </div>
+                            <div className="mt-3 text-center font-cute text-brown-warm text-xl">
+                                {!boxState[i] ? '클릭해서 열어보세요!' : ''}
+                            </div>
+                        </div>
+                        </div>
+            ))
+        }
+                </div >
+                    </div >
+                </section >
+            );
+        };
+
+        const BackgroundDecorations = () => (
+            <div className="absolute inset-0 pointer-events-none overflow-hidden h-full w-full">
+                <div className="absolute top-20 left-10 text-4xl opacity-30 animate-float">🎈</div>
+                <div className="absolute top-40 right-20 text-5xl opacity-30 animate-float-delayed">✨</div>
+                <div className="absolute bottom-1/4 left-20 text-6xl opacity-20 rotate-12 animate-float">🎂</div>
+                <div className="absolute top-1/3 right-10 text-4xl opacity-30 animate-float-delayed">🎵</div>
+                <div className="absolute bottom-20 right-1/3 text-5xl opacity-20 rotate-45 animate-float">🎀</div>
+                <div className="absolute top-20 left-1/3 text-3xl opacity-30 animate-float-delayed">🎉</div>
+                <div className="absolute bottom-40 left-10 text-4xl opacity-30 animate-float">💖</div>
+                <div className="absolute top-1/2 right-1/4 text-5xl opacity-20 animate-float-delayed">⭐</div>
+
+                <div className="absolute top-10 right-1/2 text-4xl opacity-25 animate-float-slow">🎁</div>
+                <div className="absolute bottom-10 left-1/2 text-3xl opacity-30 animate-float">🍰</div>
+                <div className="absolute top-1/4 left-10 text-5xl opacity-20 animate-float-delayed">🎶</div>
+                <div className="absolute bottom-1/3 right-5 text-4xl opacity-25 rotate-12 animate-float-slow">🌹</div>
+                <div className="absolute top-5 right-5 text-3xl opacity-30 animate-float">✨</div>
+                <div className="absolute bottom-5 left-5 text-4xl opacity-20 animate-float-delayed">🎈</div>
+            </div>
+        );
+
+        const App = () => {
+            const [showGiftPopup, setShowGiftPopup] = useState(false);
+            const [popupKey, setPopupKey] = useState(0);
+
+            useEffect(() => {
+                const colors = ['#FFD700', '#FF69B4', '#FFA500', '#FF6347', '#9370DB', '#00CED1'];
+
+                for (let i = 0; i < 50; i++) {
+                    createConfetti(colors);
+                }
+
+                const interval = setInterval(() => {
+                    createConfetti(colors);
+                }, 100);
+
+                return () => clearInterval(interval);
+            }, []);
+
+            const createConfetti = (colors) => {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 4000);
+            };
+
+            const openGiftPopup = () => {
+                setPopupKey(prev => prev + 1);
+                setShowGiftPopup(true);
+            };
+
+            return (
+                <div className={`min-h-screen pb-20 relative ${showGiftPopup ? 'animations-paused' : ''}`}>
+                    {showGiftPopup && (
+                        <div className="fixed inset-0 flex items-center justify-center bg-black/60 p-4" style={{ zIndex: 999999 }} onClick={() => setShowGiftPopup(false)}>
+                            <div className="scrapbook-bg rounded-3xl max-w-6xl w-full max-h-[90vh] overflow-y-auto p-8 relative" onClick={e => e.stopPropagation()}>
+                                <button onClick={() => setShowGiftPopup(false)} className="absolute top-4 right-4 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100 z-10">
+                                    <X size={24} className="text-brown-warm" />
+                                </button>
+                                <GiftGameSection key={popupKey} />
+                            </div>
+                        </div>
+                    )}
+
+                    <section className="scrapbook-bg py-10 md:py-20 px-4 text-center relative min-h-screen flex flex-col justify-center">
+                        <BackgroundDecorations />
+                        <div className="relative z-10 max-w-3xl mx-auto">
+                            <div className="inline-block px-6 py-3 md:px-10 md:py-4 rounded-full bg-gradient-to-r from-pastel-peach to-pastel-pink mb-6 shadow-md border-2 border-dashed border-orange-300 text-xl md:text-3xl font-cute">
+                                🎂 오늘은 마마님의 날! 🎂
+                            </div>
+                            <h1 className={`text-[52px] md:text-[100px] font-bold my-8 md:my-16 font-cute celebration-title ${showGiftPopup ? 'paused' : ''}`}>{CELEB_DATA.heroTitle}</h1>
+                            <p className="text-xl md:text-3xl mb-8 font-cute text-gray-700">
+                                <span className="subtitle-highlight">{CELEB_DATA.heroSubtitle}</span>
+                            </p>
+
+                            <div className="note p-6 md:p-8 rounded-2xl shadow-lg max-w-lg mx-auto mb-10 relative">
+                                <div className="absolute -top-3 -left-3 text-3xl md:text-4xl">💌</div>
+                                <p className="text-gray-700 leading-relaxed text-lg md:text-xl whitespace-pre-line font-body">"{CELEB_DATA.mainMessage}"</p>
+                                <div className="absolute -bottom-3 -right-3 text-3xl md:text-4xl">🎁</div>
+                            </div>
+
+                            <button onClick={openGiftPopup} className="relative px-8 py-4 md:px-12 md:py-6 bg-gradient-to-r from-pastel-peach to-pastel-pink font-bold text-2xl md:text-3xl rounded-full shadow-lg border-4 border-white hover:scale-105 transition-transform">
+                                <span className="flex items-center gap-2 font-cute text-brown-warm">
+                                    <Gift size={24} className="md:w-8 md:h-8" />
+                                    행운의 선물
+                                </span>
+                            </button>
+                        </div>
+                    </section>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+</body>
+
+</html>
