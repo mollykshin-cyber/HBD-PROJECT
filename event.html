@@ -324,7 +324,7 @@
             useEffect(() => {
                 const REWARDS_SOURCE = [
                     { type: 'BAD', text: '꽝ㅋㅋ', sub: '하지만 별님들의 사랑은 당첨~!', mediaType: 'image', src: 'assets/bad_reward.jpg' },
-                    { type: 'GOOD', text: '♥햅삐영숙데이♥', sub: '357살까지 만수무강 하세요', mediaType: 'image', src: 'assets/reward2.jpg' },
+                    { type: 'GOOD', text: '♥햅삐영숙데이♥', sub: '357살까지 만수무강 하세요★', mediaType: 'image', src: 'assets/reward2.jpg' },
                     { type: 'VIDEO', text: '뮤지컬 신의 ', sub: '뮤지컬 신의 탄생신화를 야심차게 만들어 보고자 했으나 실패...', mediaType: 'video', src: 'assets/ai_reward.mp4' }
                 ];
                 setGameRewards([...REWARDS_SOURCE].sort(() => Math.random() - 0.5));
@@ -341,6 +341,7 @@
 
             return (
                 <section className="py-16 max-w-6xl mx-auto my-12 px-4">
+                    <h2 className="text-4xl md:text-5xl font-cute text-center text-brown-warm mb-12">행운의 선물</h2>
                     {selectedReward && (
                         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" onClick={() => setSelectedReward(null)}>
                             <div className="polaroid max-w-2xl w-full" onClick={e => e.stopPropagation()}>
@@ -355,7 +356,6 @@
                                         selectedReward.src ? <img src={selectedReward.src} alt={selectedReward.text} className="w-full h-full max-h-[60vh] object-contain rounded-lg" /> :
                                             <div className="w-full h-full flex items-center justify-center"><span className="text-6xl">🎁</span></div>
                                     )}
-                                    {/* Removed persistent "두근두근" text */}
                                 </div>
                                 <div className="text-center mt-4">
                                     <div className="text-5xl mb-4">{selectedReward.type === 'BAD' ? '🤪' : (selectedReward.type === 'VIDEO' ? '🎬' : '🍰')}</div>
