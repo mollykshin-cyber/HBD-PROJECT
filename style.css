@@ -135,6 +135,7 @@ nav {
     color: var(--accent-gold);
     font-weight: bold;
     letter-spacing: 1px;
+    white-space: nowrap;
 }
 
 .nav-links {
@@ -237,17 +238,6 @@ footer p {
 .fade-in {
     animation: fadeInUp 0.8s ease-out forwards;
     opacity: 0;
-}
-
-/* --- Responsive --- */
-@media (max-width: 768px) {
-    .hero h1 {
-        font-size: 3rem;
-    }
-
-    .nav-links {
-        display: none;
-    }
 }
 
 /* --- Animations --- */
@@ -1396,15 +1386,18 @@ footer p {
 .calendar-day.active .event-dot {
     background-color: var(--bg-primary);
 }
+
 /* --- Schedule Section Spacing --- */
 .schedule-section {
-    padding-top: 150px; /* Significant spacing to clear header */
+    padding-top: 150px;
+    /* Significant spacing to clear header */
     padding-bottom: 50px;
 }
 
 /* --- Increase Calendar Header Font --- */
 .calendar-header h3 {
-    font-size: 1.35rem; /* Increased by ~2pt from 1.2rem */
+    font-size: 1.35rem;
+    /* Increased by ~2pt from 1.2rem */
 }
 
 /* --- Profile Section Spacing --- */
@@ -1418,9 +1411,11 @@ footer p {
     .hero h1 {
         font-size: 2.5rem;
     }
+
     .hero-content {
         padding-top: 120px;
     }
+
     .hero {
         height: auto;
         min-height: 100vh;
