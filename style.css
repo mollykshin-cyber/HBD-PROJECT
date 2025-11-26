@@ -1,4 +1,4 @@
-/* Premium Bright Theme - Shin Young-sook Fan Page */
+﻿/* Premium Bright Theme - Shin Young-sook Fan Page */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Gowun+Batang:wght@400;700&family=Noto+Serif+KR:wght@300;400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
 
 :root {
@@ -82,6 +82,18 @@ h1 {
     animation: textShine 5s linear infinite, gentlePulse 3s ease-in-out infinite;
 }
 
+h2 {
+    font-size: 3rem;
+    border-bottom: 3px solid var(--accent-gold);
+    display: inline-block;
+    padding-bottom: 0.5rem;
+    font-weight: 800;
+}
+
+h3 {
+    font-size: 2rem;
+}
+
 p {
     margin-bottom: var(--spacing-md);
     color: var(--text-secondary);
@@ -103,7 +115,6 @@ section {
 header {
     position: fixed;
     top: 0;
-    left: 0;
     width: 100%;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
@@ -132,9 +143,12 @@ nav {
 }
 
 .nav-links a {
-    font-weight: 500;
+    font-family: var(--font-subheading);
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     position: relative;
-    padding: 0.5rem 0;
+    color: var(--text-primary);
 }
 
 .nav-links a::after {
@@ -159,7 +173,7 @@ nav {
 
 /* --- Hero Section --- */
 .hero {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -170,6 +184,7 @@ nav {
 }
 
 .hero-content {
+    padding-top: 200px;
     position: relative;
     z-index: 10;
 }
@@ -207,6 +222,59 @@ footer {
     text-align: center;
     border-top: 1px solid var(--border-color);
     margin-top: var(--spacing-xl);
+}
+
+footer p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* --- Utilities --- */
+.hidden {
+    display: none;
+}
+
+.fade-in {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 3rem;
+    }
+
+    .nav-links {
+        display: none;
+    }
+}
+
+/* --- Animations --- */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
 }
 
 @keyframes float {
@@ -304,13 +372,14 @@ footer {
     left: -3px;
     right: -3px;
     bottom: -3px;
-    background: linear-gradient(45deg, #ffd700, #ffec8b, #ffd700, #ffec8b);
-    border-radius: 54px;
-    z-index: -2;
+    background: linear-gradient(45deg, #d4af37, #fff, #d4af37, #fff, #d4af37);
+    /* Gold/Silver Glitter */
     background-size: 400%;
-    animation: glitterBorder 3s linear infinite;
-    filter: blur(1px);
-    opacity: 0.8;
+    z-index: -2;
+    /* Behind the background */
+    border-radius: 54px;
+    animation: glitterBorder 20s linear infinite;
+    opacity: 0.7;
 }
 
 /* Inner Background (Burgundy) */
@@ -390,6 +459,7 @@ footer {
 
     to {
         transform: scale(1);
+        opacity: 1;
     }
 }
 
@@ -409,6 +479,202 @@ footer {
 .close-btn:focus {
     color: var(--accent-gold);
     transform: translateY(-20px);
+}
+
+
+@keyframes textShine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+@keyframes gentlePulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* --- Sparkle Effect --- */
+.sparkle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+    filter: blur(1px);
+    box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.6);
+}
+
+/* --- Social Icons --- */
+.social-links {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.social-icon {
+    font-size: 2rem;
+    color: var(--text-secondary);
+    transition: var(--transition-smooth);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-secondary);
+}
+
+.social-icon:hover {
+    color: var(--bg-primary);
+    background-color: var(--accent-gold);
+    border-color: var(--accent-gold);
+    position: relative;
+    color: var(--text-primary);
+}
+
+/* --- Birthday Event Button --- */
+.birthday-btn {
+    background: transparent;
+    /* Use ::after for background to allow border behind */
+    color: #ffffff;
+    padding: 1.2rem 3.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 1.3rem;
+    display: inline-block;
+    transition: all 0.3s ease;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1;
+}
+
+/* Glitter Border Effect */
+.birthday-btn::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(45deg, #d4af37, #fff, #d4af37, #fff, #d4af37);
+    /* Gold/Silver Glitter */
+    background-size: 400%;
+    z-index: -2;
+    /* Behind the background */
+    border-radius: 54px;
+    animation: glitterBorder 20s linear infinite;
+    opacity: 0.7;
+}
+
+/* Inner Background (Burgundy) */
+.birthday-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #6b303b 0%, #854552 50%, #6b303b 100%);
+    border-radius: 50px;
+    z-index: -1;
+    /* Behind text, in front of border */
+}
+
+.birthday-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    color: #ffffff;
+}
+
+.birthday-btn:hover::before {
+    filter: blur(2px);
+    opacity: 1;
+}
+
+@keyframes glitterBorder {
+    0% {
+        background-position: 0 0;
+    }
+
+    50% {
+        background-position: 100% 0;
+    }
+
+    100% {
+        background-position: 0 0;
+    }
+}
+
+/* --- Lightbox Modal --- */
+.lightbox {
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.lightbox.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 90%;
+    border: 2px solid var(--accent-gold);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+    animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    z-index: 2001;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: var(--accent-gold);
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .nav-btn {
@@ -475,8 +741,533 @@ footer {
 
 .calendar-header h3 {
     margin-bottom: 0;
-    font-size: 1.35rem;
-    /* Increased from 1.2rem */
+    font-size: 1.5rem;
+    color: var(--accent-gold);
+}
+
+.nav-btn-cal {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1;
+}
+
+/* Glitter Border Effect */
+.birthday-btn::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(45deg, #d4af37, #fff, #d4af37, #fff, #d4af37);
+    /* Gold/Silver Glitter */
+    background-size: 400%;
+    z-index: -2;
+    /* Behind the background */
+    border-radius: 54px;
+    animation: glitterBorder 20s linear infinite;
+    opacity: 0.7;
+}
+
+/* Inner Background (Burgundy) */
+.birthday-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #6b303b 0%, #854552 50%, #6b303b 100%);
+    border-radius: 50px;
+    z-index: -1;
+    /* Behind text, in front of border */
+}
+
+.birthday-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    color: #ffffff;
+}
+
+.birthday-btn:hover::before {
+    filter: blur(2px);
+    opacity: 1;
+}
+
+@keyframes glitterBorder {
+    0% {
+        background-position: 0 0;
+    }
+
+    50% {
+        background-position: 100% 0;
+    }
+
+    100% {
+        background-position: 0 0;
+    }
+}
+
+/* --- Lightbox Modal --- */
+.lightbox {
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.lightbox.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 90%;
+    border: 2px solid var(--accent-gold);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+    animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    z-index: 2001;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: var(--accent-gold);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 16px;
+    cursor: pointer;
+    font-size: 24px;
+    transition: 0.3s;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2001;
+}
+
+.nav-btn:hover {
+    background-color: var(--accent-gold);
+    color: var(--bg-primary);
+}
+
+.prev-btn {
+    left: 20px;
+}
+
+.next-btn {
+    right: 20px;
+}
+
+@media (max-width: 768px) {
+    .lightbox-content {
+        max-width: 95%;
+    }
+
+    .nav-btn {
+        padding: 10px;
+        font-size: 18px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .prev-btn {
+        left: 10px;
+    }
+
+    .next-btn {
+        right: 10px;
+    }
+}
+
+/* --- Calendar --- */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.calendar-header h3 {
+    margin-bottom: 0;
+    font-size: 1.5rem;
+    color: var(--accent-gold);
+}
+
+.nav-btn-cal {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-btn-cal:hover {
+    background-color: var(--accent-gold);
+    color: var(--bg-primary);
+    border-color: var(--accent-gold);
+}
+
+.calendar-grid {
+    display: flex;
+    overflow-x: auto;
+    gap: 5px;
+    padding-bottom: 5px;
+    /* Space for scrollbar */
+    scrollbar-width: thin;
+    /* Firefox */
+    scrollbar-color: var(--accent-gold) var(--bg-secondary);
+}
+
+.calendar-grid::-webkit-scrollbar {
+    height: 4px;
+}
+
+.calendar-grid::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+.calendar-grid::-webkit-scrollbar-thumb {
+    background-color: var(--accent-gold);
+    border-radius: 10px;
+}
+
+.calendar-day {
+    flex: 0 0 auto;
+    /* Don't shrink, don't grow */
+    width: 35px;
+    height: 50px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    transition: var(--transition-fast);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-card);
+}
+
+.calendar-day .day-name {
+    font-size: 0.6rem;
+    color: var(--text-secondary);
+    margin-bottom: 0;
+    line-height: 1;
+}
+
+.calendar-day .day-number {
+    font-size: 0.9rem;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.calendar-day:hover {
+    background-color: var(--bg-primary);
+    border-color: var(--accent-gold);
+}
+
+.calendar-day.today {
+    background-color: rgba(212, 175, 55, 0.1);
+    font-weight: bold;
+    color: var(--accent-gold);
+    border-radius: 4px;
+}
+
+.calendar-day.sat .day-name,
+.calendar-day.sat .day-number {
+    color: #4a90e2;
+    /* Blue for Saturday */
+}
+
+.calendar-day.sun .day-name,
+.calendar-day.sun .day-number,
+.calendar-day.holiday .day-name,
+.calendar-day.holiday .day-number {
+    color: #e74c3c;
+    /* Red for Sunday and Holidays */
+}
+
+.calendar-day.has-event {
+    font-weight: bold;
+}
+
+.event-dot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--accent-gold);
+    border-radius: 50%;
+    margin-top: 4px;
+}
+
+.calendar-day.active {
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    z-index: 2001;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: var(--accent-gold);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 16px;
+    cursor: pointer;
+    font-size: 24px;
+    transition: 0.3s;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2001;
+}
+
+.nav-btn:hover {
+    background-color: var(--accent-gold);
+    color: var(--bg-primary);
+}
+
+.prev-btn {
+    left: 20px;
+}
+
+.next-btn {
+    right: 20px;
+}
+
+@media (max-width: 768px) {
+    .lightbox-content {
+        max-width: 95%;
+    }
+
+    .nav-btn {
+        padding: 10px;
+        font-size: 18px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .prev-btn {
+        left: 10px;
+    }
+
+    .next-btn {
+        right: 10px;
+    }
+}
+
+/* --- Calendar --- */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.calendar-header h3 {
+    margin-bottom: 0;
+    font-size: 1.5rem;
+    color: var(--accent-gold);
+}
+
+.nav-btn-cal {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-btn-cal:hover {
+    background-color: var(--accent-gold);
+    color: var(--bg-primary);
+    border-color: var(--accent-gold);
+}
+
+.calendar-grid {
+    display: flex;
+    overflow-x: auto;
+    gap: 5px;
+    padding-bottom: 5px;
+    /* Space for scrollbar */
+    scrollbar-width: thin;
+    /* Firefox */
+    scrollbar-color: var(--accent-gold) var(--bg-secondary);
+}
+
+.calendar-grid::-webkit-scrollbar {
+    height: 4px;
+}
+
+.calendar-grid::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+.calendar-grid::-webkit-scrollbar-thumb {
+    background-color: var(--accent-gold);
+    border-radius: 10px;
+}
+
+.calendar-day {
+    flex: 0 0 auto;
+    /* Don't shrink, don't grow */
+    width: 35px;
+    height: 50px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    transition: var(--transition-fast);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-card);
+}
+
+.calendar-day .day-name {
+    font-size: 0.6rem;
+    color: var(--text-secondary);
+    margin-bottom: 0;
+    line-height: 1;
+}
+
+.calendar-day .day-number {
+    font-size: 0.9rem;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.calendar-day:hover {
+    background-color: var(--bg-primary);
+    border-color: var(--accent-gold);
+}
+
+.calendar-day.today {
+    background-color: rgba(212, 175, 55, 0.1);
+    font-weight: bold;
+    color: var(--accent-gold);
+    border-radius: 4px;
+}
+
+.calendar-day.sat .day-name,
+.calendar-day.sat .day-number {
+    color: #4a90e2;
+    /* Blue for Saturday */
+}
+
+.calendar-day.sun .day-name,
+.calendar-day.sun .day-number,
+.calendar-day.holiday .day-name,
+.calendar-day.holiday .day-number {
+    color: #e74c3c;
+    /* Red for Sunday and Holidays */
+}
+
+.calendar-day.has-event {
+    font-weight: bold;
+}
+
+.event-dot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--accent-gold);
+    border-radius: 50%;
+    margin-top: 4px;
+}
+
+.calendar-day.active {
+    background-color: var(--accent-gold);
+    color: var(--bg-primary);
+    border-radius: 4px;
+}
+
+.calendar-day.active .event-dot {
+    background-color: var(--bg-primary);
+}
+
+/* --- Calendar (Corrected) --- */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.calendar-header h3 {
+    margin-bottom: 0;
+    font-size: 1.2rem;
     color: var(--accent-gold);
 }
 
@@ -605,12 +1396,15 @@ footer {
 .calendar-day.active .event-dot {
     background-color: var(--bg-primary);
 }
-
 /* --- Schedule Section Spacing --- */
 .schedule-section {
-    padding-top: 150px;
-    /* Significant spacing to clear header */
+    padding-top: 150px; /* Significant spacing to clear header */
     padding-bottom: 50px;
+}
+
+/* --- Increase Calendar Header Font --- */
+.calendar-header h3 {
+    font-size: 1.35rem; /* Increased by ~2pt from 1.2rem */
 }
 
 /* --- Profile Section Spacing --- */
@@ -619,395 +1413,16 @@ footer {
     padding-bottom: 50px;
 }
 
-/* --- Section Title --- */
-.section-title {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 2rem;
-    color: var(--accent-gold);
-}
 
-.section-title h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--accent-gold);
-    margin: 0;
-}
-
-.tab-content h2 {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--accent-gold);
-    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-    padding-bottom: 0.5rem;
-}
-
-.timeline-year {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.timeline-year-header {
-    padding: 1rem 1.5rem;
-    background: var(--bg-secondary);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.timeline-year-header:hover {
-    background-color: #f5f5f5;
-}
-
-.timeline-year-info {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.timeline-year-label {
-    font-size: 1.3rem;
-    /* Increased */
-    font-weight: bold;
-    color: var(--accent-gold);
-}
-
-.timeline-year-count {
-    color: var(--text-secondary);
-    font-size: 1.0rem;
-    /* Increased */
-}
-
-.timeline-works {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-out;
-}
-
-.timeline-works.expanded {
-    max-height: 500px;
-    /* Limit height to approx 5 items */
-    overflow-y: auto;
-    transition: max-height 0.5s ease-in;
-    scrollbar-width: thin;
-    scrollbar-color: var(--accent-gold) var(--bg-secondary);
-}
-
-.timeline-works.expanded::-webkit-scrollbar {
-    width: 6px;
-}
-
-.timeline-works.expanded::-webkit-scrollbar-track {
-    background: var(--bg-secondary);
-}
-
-.timeline-works.expanded::-webkit-scrollbar-thumb {
-    background-color: var(--accent-gold);
-    border-radius: 10px;
-}
-
-.timeline-works-content {
-    padding: 1.5rem;
-}
-
-.timeline-work {
-    margin-bottom: 1rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px dashed var(--border-color);
-}
-
-.timeline-work:last-child {
-    margin-bottom: 0;
-    padding-bottom: 0;
-    border-bottom: none;
-}
-
-.timeline-work-title {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.25rem;
-}
-
-.timeline-work-dot {
-    width: 8px;
-    height: 8px;
-    background-color: var(--accent-gold);
-    border-radius: 50%;
-}
-
-.timeline-work-name {
-    font-weight: bold;
-    font-size: 1.2rem;
-    /* Increased */
-}
-
-.timeline-work-role {
-    margin-left: 1rem;
-    color: var(--text-secondary);
-    font-size: 1.05rem;
-    /* Increased */
-}
-
-.timeline-work-details {
-    margin-left: 1rem;
-    font-size: 0.95rem;
-    /* Increased */
-    color: #888;
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    margin-top: 0.25rem;
-}
-
-/* Roles */
-.roles-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-}
-
-.role-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.role-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    border-color: var(--accent-gold);
-}
-
-.role-card-content {
-    padding: 1.5rem;
-}
-
-.role-card-header {
-    margin-bottom: 0.5rem;
-}
-
-.role-card-work {
-    font-family: var(--font-heading);
-    font-size: 1.4rem;
-    /* Increased */
-    color: var(--text-primary);
-}
-
-.role-card-role {
-    color: var(--accent-gold);
-    font-weight: bold;
-    margin-bottom: 1rem;
-}
-
-.role-card-desc {
-    font-size: 1.05rem;
-    /* Increased */
-    color: var(--text-secondary);
-    line-height: 1.6;
-}
-
-/* Awards */
-.awards-list-detailed {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.award-item {
-    display: flex;
-    gap: 2rem;
-    padding: 1.5rem;
-    background: var(--bg-card);
-    border-left: 4px solid var(--accent-gold);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    align-items: center;
-}
-
-.award-year {
-    font-size: 1.6rem;
-    /* Increased */
-    font-weight: bold;
-    color: var(--accent-gold);
-    min-width: 80px;
-}
-
-.award-info h4 {
-    font-size: 1.2rem;
-    /* Increased */
-    margin-bottom: 0.25rem;
-    color: var(--text-primary);
-}
-
-.award-info p {
-    color: var(--text-secondary);
-    font-size: 1.0rem;
-    /* Increased */
-}
-
-/* Infographic */
-.infographic-content {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-}
-
-.stat-card {
-    padding: 1.5rem;
-    border-radius: 10px;
-    text-align: center;
-    color: white;
-}
-
-.stat-card.gold {
-    background: linear-gradient(135deg, var(--accent-gold), #e6c250);
-}
-
-.stat-card.burgundy {
-    background: linear-gradient(135deg, #800020, #a03040);
-    /* Fallback for burgundy */
-}
-
-.stat-value {
-    font-size: 2.6rem;
-    /* Increased */
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-}
-
-.stat-label {
-    font-size: 1.1rem;
-    /* Increased */
-    opacity: 0.9;
-}
-
-.info-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    padding: 1.5rem;
-}
-
-.info-card-title {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-    border-bottom: 2px solid var(--accent-gold);
-    padding-bottom: 0.5rem;
-    display: inline-block;
-}
-
-.info-card-title h3 {
-    margin: 0;
-}
-
-.ranking-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.ranking-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.ranking-number {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    color: white;
-}
-
-.ranking-number.gold {
-    background-color: var(--accent-gold);
-}
-
-.ranking-number.burgundy {
-    background-color: #800020;
-}
-
-.ranking-content {
-    flex: 1;
-}
-
-.ranking-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.25rem;
-    font-size: 1.0rem;
-    /* Increased */
-}
-
-.ranking-bar {
-    height: 8px;
-    background-color: #eee;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.ranking-bar-fill {
-    height: 100%;
-    border-radius: 4px;
-}
-
-.ranking-bar-fill.gold-burgundy {
-    background: linear-gradient(to right, var(--accent-gold), #800020);
-}
-
-.ranking-bar-fill.burgundy-gold {
-    background: linear-gradient(to right, #800020, var(--accent-gold));
-}
-
-.highlights-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1rem;
-}
-
-.highlight-item {
-    text-align: center;
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.5);
-    border-radius: 8px;
-}
-
-.highlight-label {
-    font-size: 0.95rem;
-    /* Increased */
-    color: var(--text-secondary);
-    margin-bottom: 0.25rem;
-}
-
-.highlight-value {
-    font-weight: bold;
-    color: var(--text-primary);
-}
-
-/* Statistics Section Adjustments */
-.info-card-title h3 {
-    font-size: 1rem !important;
-    /* Reduced from 2rem to 1rem as requested */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    .hero-content {
+        padding-top: 120px;
+    }
+    .hero {
+        height: auto;
+        min-height: 100vh;
+    }
 }
