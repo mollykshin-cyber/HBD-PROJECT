@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles | 신영숙</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mobile-nav.css">
+    <style>
+        .article-list {
+            display: grid;
+            gap: var(--spacing-md);
+        }
+
+        .article-card {
+            background-color: var(--bg-card);
+            padding: var(--spacing-lg);
+            border: 1px solid var(--border-color);
+            transition: var(--transition-fast);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .article-card:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-2px);
+        }
+
+        .article-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .article-content p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0;
+        }
+
+        .article-link {
+            color: var(--accent-gold);
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .add-article-section {
+            margin-top: var(--spacing-xl);
+            background-color: var(--bg-card);
+            padding: var(--spacing-lg);
+            border: 1px solid var(--border-color);
+        }
+
+        .inline-form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .inline-form input,
+        .inline-form button {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1rem;
+        }
+
+        .inline-form input {
+            background-color: var(--bg-primary);
+            border: 1px solid #ccc;
+            color: var(--text-primary);
+            border-radius: 4px;
+        }
+
+        .inline-form button {
+            background-color: var(--accent-gold);
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            color: white;
+            transition: background-color 0.3s;
+            border-radius: 4px;
+        }
+
+        .inline-form button:hover {
+            background-color: var(--accent-gold-hover);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">SHIN YOUNG SOOK</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="schedule.html">Schedule</a></li>
+                    <li><a href="articles.html" class="active">Articles</a></li>
+                    <li><a href="event.html">Event</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding-top: 40px;">
+        <section class="fade-in">
+            <h2>ARTICLES</h2>
+
+            <div class="article-list" id="article-list">
+                <!-- Articles will be added here -->
+            </div>
+
+            <div class="add-article-section">
+                <h3>Add New Article</h3>
+                <form id="article-form" class="inline-form">
+                    <input type="text" id="art-title" placeholder="Article Title" required>
+                    <input type="url" id="art-url" placeholder="https://..." required>
+                    <input type="text" id="art-source" placeholder="Source (e.g. Naver News)">
+                    <input type="date" id="art-date" required>
+                    <button type="submit">Add</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Shin Young-sook Fan Page. Created by Shinna.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

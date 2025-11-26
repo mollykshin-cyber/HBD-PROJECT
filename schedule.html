@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule | 신영숙</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mobile-nav.css">
+    <style>
+        .schedule-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--spacing-xl);
+        }
+
+        .add-schedule-form {
+            background-color: var(--bg-card);
+            padding: var(--spacing-lg);
+            border: 1px solid var(--border-color);
+            height: fit-content;
+        }
+
+        .form-group {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--accent-gold);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: var(--bg-primary);
+            border: 1px solid #333;
+            color: var(--text-primary);
+            font-family: var(--font-body);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--accent-gold);
+            border: none;
+            color: var(--bg-primary);
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .submit-btn:hover {
+            background-color: var(--accent-gold-hover);
+        }
+
+        .schedule-content-wrapper {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            /* Ensure full width */
+        }
+
+        /* Weekly Calendar Styles */
+        .weekly-calendar-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #fff;
+            border-bottom: 1px solid #eee;
+            padding: 2.5rem 0 1rem 0;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .nav-btn-week {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0 1rem;
+            color: #333;
+            z-index: 10;
+        }
+
+        .days-wrapper {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+            flex: 1;
+            justify-content: space-around;
+            /* Distribute space */
+        }
+
+        .days-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+
+        .day-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 50px;
+            padding: 0.5rem;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.2s;
+        }
+
+        .day-item:hover {
+            background-color: #f5f5f5;
+        }
+
+        .day-item.active {
+            background-color: #f5f5f5;
+            font-weight: bold;
+        }
+
+        .day-item.today {
+            position: relative;
+        }
+
+        .day-item.today::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 3px;
+            background-color: #000;
+        }
+
+        .day-date {
+            font-size: 1.2rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .day-name {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .day-name.sun {
+            color: #ff6b6b;
+        }
+
+        .day-name.sat {
+            color: #4dabf7;
+        }
+
+        .current-month-label {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff;
+            padding: 0.2rem 1rem;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: var(--text-primary);
+            border: 1px solid #eee;
+            border-radius: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Schedule List Styles */
+        .schedule-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+
+        .schedule-item {
+            background-color: var(--bg-card);
+            padding: var(--spacing-md);
+            border-left: 4px solid var(--accent-gold);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition-fast);
+        }
+
+        .schedule-item:hover {
+            transform: translateX(5px);
+        }
+
+        .date-box {
+            text-align: center;
+            margin-right: var(--spacing-md);
+            min-width: 80px;
+        }
+
+        .date-box .month {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        .date-box .day {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+
+        .info-box h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.2rem;
+            color: var(--text-primary);
+        }
+
+        .info-box p {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Poster Styles */
+        .schedule-content {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+        .poster-box {
+            width: 60px;
+            height: 80px;
+            margin-right: var(--spacing-md);
+            border-radius: 4px;
+            overflow: hidden;
+            background-color: #eee;
+            flex-shrink: 0;
+        }
+
+        .poster-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            .schedule-container {
+                grid-template-columns: 1fr;
+            }
+
+            .poster-box {
+                width: 50px;
+                height: 70px;
+            }
+
+            .date-box {
+                min-width: 60px;
+                margin-right: 0.5rem;
+            }
+
+            .date-box .day {
+                font-size: 1.4rem;
+            }
+
+            .date-box .month {
+                font-size: 0.75rem;
+            }
+
+            .schedule-item {
+                padding: 0.75rem;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .schedule-content {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+
+            .info-box h3 {
+                font-size: 1rem;
+            }
+
+            .info-box p {
+                font-size: 0.85rem;
+            }
+
+            .add-schedule-form {
+                margin-top: var(--spacing-lg);
+            }
+
+            .days-wrapper {
+                justify-content: flex-start;
+                /* Allow scrolling on mobile */
+            }
+
+            .day-item {
+                min-width: 14.28%;
+                /* 7 days fit perfectly or scroll */
+                flex-shrink: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">SHIN YOUNG SOOK</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="schedule.html" class="active">Schedule</a></li>
+                    <li><a href="articles.html">Articles</a></li>
+                    <li><a href="event.html">Event</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding-top: 100px;">
+        <section class="schedule-section" style="padding-top: 0;">
+            <div class="schedule-container">
+
+                <div class="schedule-content-wrapper">
+                    <h2>SCHEDULE</h2>
+
+                    <!-- Weekly Calendar Section -->
+                    <div class="weekly-calendar-container">
+                        <div class="current-month-label" id="current-month-label">2025.11</div>
+                        <button class="nav-btn-week" id="prev-week">&lt;</button>
+                        <div class="days-wrapper" id="days-wrapper">
+                            <!-- Days generated by JS -->
+                        </div>
+                        <button class="nav-btn-week" id="next-week">&gt;</button>
+                    </div>
+
+                    <!-- List -->
+                    <div class="schedule-list" id="schedule-list">
+                        <!-- Items will be added here -->
+                    </div>
+                </div>
+
+                <!-- Add Form -->
+                <div class="add-schedule-form">
+                    <h3>Add Schedule</h3>
+                    <form id="schedule-form">
+                        <div class="form-group">
+                            <label>Date</label>
+                            <input type="date" id="sched-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Title (Musical/Event)</label>
+                            <input type="text" id="sched-title" placeholder="e.g. Rebecca" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Poster Image</label>
+                            <input type="file" id="sched-poster" accept="image/*">
+                        </div>
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" id="sched-location" placeholder="e.g. Blue Square">
+                        </div>
+                        <div class="form-group">
+                            <label>Time</label>
+                            <input type="time" id="sched-time">
+                        </div>
+                        <button type="submit" class="submit-btn">Add to Schedule</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Shin Young-sook Fan Page. Created by Shinna.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Weekly Calendar Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const daysWrapper = document.getElementById('days-wrapper');
+            const currentMonthLabel = document.getElementById('current-month-label');
+            const prevWeekBtn = document.getElementById('prev-week');
+            const nextWeekBtn = document.getElementById('next-week');
+
+            let currentDate = new Date(); // Start from today
+
+            function renderWeek(startDate) {
+                daysWrapper.innerHTML = '';
+                const startOfWeek = new Date(startDate);
+                // Adjust to start on Sunday? Or just show 7 days starting from current?
+                // Let's make it start from Sunday of the current week
+                startOfWeek.setDate(startDate.getDate() - startDate.getDay());
+
+                const month = startOfWeek.getFullYear() + '.' + String(startOfWeek.getMonth() + 1).padStart(2, '0');
+                currentMonthLabel.textContent = month;
+
+                const today = new Date();
+
+                for (let i = 0; i < 7; i++) {
+                    const date = new Date(startOfWeek);
+                    date.setDate(startOfWeek.getDate() + i);
+
+                    const dayItem = document.createElement('div');
+                    dayItem.className = 'day-item';
+
+                    // Check if it's today
+                    if (date.toDateString() === today.toDateString()) {
+                        dayItem.classList.add('today');
+                        dayItem.classList.add('active'); // Highlight today by default
+                    }
+
+                    const dayNum = date.getDate();
+                    const dayName = ['일', '월', '화', '수', '목', '금', '토'][date.getDay()];
+
+                    let dayClass = 'day-name';
+                    if (date.getDay() === 0) dayClass += ' sun';
+                    if (date.getDay() === 6) dayClass += ' sat';
+
+                    dayItem.innerHTML = `
+                        <span class="day-date">${String(dayNum).padStart(2, '0')}</span>
+                        <span class="${dayClass}">${date.toDateString() === today.toDateString() ? '오늘' : dayName}</span>
+                    `;
+
+                    dayItem.addEventListener('click', () => {
+                        document.querySelectorAll('.day-item').forEach(el => el.classList.remove('active'));
+                        dayItem.classList.add('active');
+                        // Filter schedule logic here if needed
+                    });
+
+                    daysWrapper.appendChild(dayItem);
+                }
+            }
+
+            renderWeek(currentDate);
+
+            prevWeekBtn.addEventListener('click', () => {
+                currentDate.setDate(currentDate.getDate() - 7);
+                renderWeek(currentDate);
+            });
+
+            nextWeekBtn.addEventListener('click', () => {
+                currentDate.setDate(currentDate.getDate() + 7);
+                renderWeek(currentDate);
+            });
+        });
+    </script>
+</body>
+
+</html>
