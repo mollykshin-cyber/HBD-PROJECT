@@ -506,6 +506,29 @@ function renderInfographic() {
     infographicContainer.appendChild(topVenuesCard);
 }
 
+// 스크롤 동작 초기화
+function initScrollBehavior() {
+    const tabsContainer = document.querySelector('.tabs-container');
+    const footer = document.querySelector('footer');
+
+    if (!tabsContainer || !footer) return;
+
+    // 트랜지션 추가
+    tabsContainer.style.transition = 'transform 0.3s ease-in-out';
+
+    window.addEventListener('scroll', () => {
+        const footerRect = footer.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+
+        // 푸터가 화면에 보이면 탭 메뉴 숨김
+        if (footerRect.top < windowHeight) {
+            tabsContainer.style.transform = 'translateY(-200%)'; // 위로 숨김
+        } else {
+            tabsContainer.style.transform = 'translateY(0)';
+        }
+    });
+}
+
 // 초기화
 document.addEventListener('DOMContentLoaded', () => {
     initTabs();
@@ -513,4 +536,5 @@ document.addEventListener('DOMContentLoaded', () => {
     renderRoles();
     renderAwards();
     renderInfographic();
+    initScrollBehavior();
 });
