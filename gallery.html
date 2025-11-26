@@ -55,26 +55,12 @@
 
         .upload-btn {
             cursor: pointer;
-            padding: 0.5rem 1.5rem;
-            background-color: var(--accent-gold);
-            color: var(--bg-primary);
-            font-weight: bold;
-            border-radius: 2px;
-            transition: var(--transition-fast);
-            display: inline-block;
-            border: 1px solid var(--border-color);
         }
 
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 0.5rem;
-        }
-
-        @media (max-width: 768px) {
-            .gallery-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
+            gap: 2px !important;
         }
 
         @media (max-width: 480px) {
