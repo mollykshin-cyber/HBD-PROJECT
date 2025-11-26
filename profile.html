@@ -10,20 +10,17 @@
     <style>
         /* Profile Header Styles */
         .profile-header {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/hero-bg.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: white;
-            padding: 8rem 0 4rem;
+            position: relative;
+            padding: 2.67rem 1rem;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #fffaf0, rgba(230, 230, 250, 0.2), #fffaf0);
             text-align: center;
-            margin-bottom: 0;
         }
 
         .profile-header-content {
             max-width: 800px;
             margin: 0 auto;
-            padding: 0 1rem;
+            padding: 0 0rem;
         }
 
         .profile-badge {
@@ -31,6 +28,7 @@
             padding: 0.5rem 1rem;
             border-radius: 9999px;
             border: 1px solid rgba(212, 175, 55, 0.3);
+            margin-top: 4.5rem;
             margin-bottom: 1rem;
         }
 
@@ -51,9 +49,9 @@
 
         .profile-description {
             font-size: 1.25rem;
-            color: #e5e7eb;
+            color: #4b5563;
             font-weight: 300;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0em;
             max-width: 42rem;
             margin-left: auto;
             margin-right: auto;
@@ -112,6 +110,45 @@
 
         /* Main Content */
         .main-content {
+            max-width: 56rem;
+            margin: 0 auto;
+            padding: 1rem;
+            padding-bottom: 5rem;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Tab Title Override - Reduced Font Size */
+        .tab-content h2 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #d4af37;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Overview Tab Styles */
+        .profile-grid {
+            display: grid;
             grid-template-columns: 1fr 1.5fr;
             gap: 4rem;
             align-items: start;
@@ -641,7 +678,8 @@
                 </div>
                 <h1 class="profile-name">신영숙</h1>
                 <p class="profile-description">
-                    "폭발적인 가창력과 압도적인 무대 장악력을 가진 대한민국 대표 뮤지컬 배우.<br>
+                    "폭발적인 가창력과 압도적인 무대 장악력을 가진<br>
+                    대한민국 대표 뮤지컬 배우.<br>
                     1999년 데뷔 이래 다양한 캐릭터를 완벽하게 소화하며<br>
                     독보적인 존재감을 보여주고 있다."
                 </p>

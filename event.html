@@ -387,7 +387,7 @@
                 const REWARDS_SOURCE = [
                     { type: 'BAD', text: '꽝ㅋ▽ㅋ', sub: '하지만 별님들의 사랑은 당첨~!', mediaType: 'video', src: 'assets/bad_reward.mp4' },
                     { type: 'GOOD', text: '♥️햅삐영숙데이♥️', sub: '357살까지 만수무강 하세요★', mediaType: 'image', src: 'assets/reward2.jpg' },
-                    { type: 'VIDEO', text: '뮤지컬 신의 등장✨', sub: '뮤지컬 신의 탄생 신화를 야심차게 만들어 보고자 했으나 실패... (ft. AI)', mediaType: 'video', src: 'assets/ai_reward.mp4' }
+                    { type: 'VIDEO', text: '뮤지컬 신의 등장✨', sub: '뮤지컬 신의 탄생 신화를 야심차게 만들어 보고자 했으나 ㅠㅠ 실패... (ft. AI)', mediaType: 'video', src: 'assets/ai_reward.mp4' }
                 ];
 
                 // Fisher-Yates Shuffle
@@ -426,12 +426,12 @@
             };
 
             return html`
-                <section className="py-16 max-w-6xl mx-auto my-12 px-4">
+                <section className="py-4 max-w-6xl mx-auto my-4 px-4">
                     <h2 className="text-4xl md:text-5xl font-cute text-center text-brown-warm mb-12">🎁행운의 선물</h2>
                     ${selectedReward && html`
-                        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" onClick=${() => setSelectedReward(null)}>
+                        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 py-2 px-4" onClick=${() => setSelectedReward(null)}>
                             <div className="polaroid max-w-2xl w-full" onClick=${e => e.stopPropagation()}>
-                                <button onClick=${() => setSelectedReward(null)} className="absolute top-4 right-4 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100">
+                                <button onClick=${() => setSelectedReward(null)} className="absolute top-2 right-2 z-10 bg-white rounded-full p-1 shadow-lg hover:bg-gray-100">
                                     <${X} size=${24} className="text-brown-warm" />
                                 </button>
                                 <div className="relative bg-gradient-to-br from-pastel-peach to-pastel-pink flex items-center justify-center min-h-[300px] md:min-h-[400px] rounded-lg">
@@ -442,9 +442,9 @@
                             html`<div className="w-full h-full flex items-center justify-center"><span className="text-6xl">🎁</span></div>`
                     )}
                                 </div>
-                                <div className="mt-6 text-center">
+                                <div className="mt-3 mb-2 text-center">
                                     <h3 className="text-3xl font-cute text-brown-warm mb-2">${selectedReward.text}</h3>
-                                    <p className="text-xl text-gray-600 font-body">${selectedReward.sub}</p>
+                                    <p className="text-2xl text-gray-600 font-body">${selectedReward.sub}</p>
                                 </div>
                             </div>
                         </div>
@@ -468,11 +468,11 @@
                                             </div>
                                         `}
                                     </div>
-                                    <div className="text-center font-cute text-brown-warm text-xl">
+                                    <div className="text-center font-cute text-brown-warm text-2xl">
                                         ${!boxState[i] ? '클릭해서 열어보세요!' : html`
                                             <div className="flex flex-col items-center">
-                                                <p className="font-bold text-lg">${gameRewards[i].text}</p>
-                                                <p className="text-sm text-gray-600 mt-1">${gameRewards[i].sub}</p>
+                                                <p className="font-bold text-2xl">${gameRewards[i].text}</p>
+                                                <p className="text-xl text-gray-600 mt-1">${gameRewards[i].sub}</p>
                                             </div>
                                         `}
                                     </div>
@@ -509,15 +509,15 @@
                     <section className="scrapbook-bg py-10 md:py-20 px-4 text-center relative min-h-screen flex flex-col justify-center">
                         <${BackgroundDecorations} />
                         <div className="relative z-20 max-w-3xl mx-auto">
-                            <div className="inline-block px-6 py-3 md:px-10 md:py-4 rounded-full bg-gradient-to-r from-pastel-peach to-pastel-pink mb-6 shadow-md border-2 border-dashed border-orange-300 text-xl md:text-3xl font-cute">
+                            <div className="inline-block px-6 py-3 md:px-10 md:py-4 rounded-full bg-gradient-to-r from-pastel-peach to-pastel-pink mt-[3.2rem] mb-6 shadow-md border-2 border-dashed border-orange-300 text-xl md:text-3xl font-cute">
                                 🎂 오늘은 마마님의 날! 🎂
                             </div>
-                            <h1 className=${`text-[36px] md:text-[100px] font-bold my-8 md:my-16 font-cute celebration-title ${showGiftPopup ? 'paused' : ''}`}>${CELEB_DATA.heroTitle}</h1>
+                            <h1 className=${`text-[41px] md:text-[105px] font-bold my-11 md:my-19 px-4 font-cute celebration-title ${showGiftPopup ? 'paused' : ''}`}>${CELEB_DATA.heroTitle}</h1>
                             <p className="text-xl md:text-3xl mb-8 font-cute text-gray-700">
                                 <span className="subtitle-highlight">${CELEB_DATA.heroSubtitle}</span>
                             </p>
 
-                            <div className="note p-6 md:p-8 rounded-2xl shadow-lg max-w-lg mx-auto mb-10 relative">
+                            <div className="note px-7 py-6 md:px-9 md:py-8 rounded-2xl shadow-lg max-w-lg mx-auto mb-10 relative">
                                 <div className="absolute -top-3 -left-3 text-3xl md:text-4xl">💌</div>
                                 <p className="text-gray-700 leading-relaxed text-lg md:text-xl whitespace-pre-line font-body">"${CELEB_DATA.mainMessage}"</p>
                                 <div className="absolute -bottom-3 -right-3 text-3xl md:text-4xl">🎁</div>
