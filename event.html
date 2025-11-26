@@ -403,6 +403,10 @@
                 newBoxState[i] = true;
                 setBoxState(newBoxState);
 
+                setTimeout(() => {
+                    setSelectedReward(gameRewards[i]);
+                }, 800);
+
                 // Confetti effect
                 for (let k = 0; k < 50; k++) {
                     const confetti = document.createElement('div');
