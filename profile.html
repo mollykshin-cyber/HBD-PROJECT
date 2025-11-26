@@ -8,24 +8,22 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="mobile-nav.css">
     <style>
-        main {
-            padding-top: 100px;
-        }
-
-        /* Header Section */
+        /* Profile Header Styles */
         .profile-header {
-            position: relative;
-            padding: 4rem 1rem;
-            overflow: hidden;
-            background: linear-gradient(to bottom, #fffaf0, rgba(230, 230, 250, 0.2), #fffaf0);
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            padding: 8rem 0 4rem;
             text-align: center;
+            margin-bottom: 0;
         }
 
         .profile-header-content {
-            max-width: 56rem;
+            max-width: 800px;
             margin: 0 auto;
-            position: relative;
-            z-index: 10;
+            padding: 0 1rem;
         }
 
         .profile-badge {
@@ -53,7 +51,7 @@
 
         .profile-description {
             font-size: 1.25rem;
-            color: #4b5563;
+            color: #e5e7eb;
             font-weight: 300;
             margin-bottom: 0.25rem;
             max-width: 42rem;
@@ -114,36 +112,6 @@
 
         /* Main Content */
         .main-content {
-            max-width: 56rem;
-            margin: 0 auto;
-            padding: 1rem;
-            padding-bottom: 5rem;
-        }
-
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.5s ease-out forwards;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Overview Tab Styles */
-        .profile-grid {
-            display: grid;
             grid-template-columns: 1fr 1.5fr;
             gap: 4rem;
             align-items: start;
@@ -229,6 +197,419 @@
             .profile-name {
                 font-size: 2rem;
             }
+        }
+
+        /* Timeline */
+        .timeline-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .timeline-year {
+            background-color: white;
+            border-radius: 0.75rem;
+            border: 1px solid #e5e7eb;
+            overflow: hidden;
+            box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            transition: border-color 0.3s;
+        }
+
+        .timeline-year:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+
+        .timeline-year-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem;
+            cursor: pointer;
+            background-color: rgba(255, 250, 240, 0.3);
+            transition: background-color 0.3s;
+        }
+
+        .timeline-year-header:hover {
+            background-color: rgba(255, 250, 240, 0.5);
+        }
+
+        .timeline-year-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .timeline-year-label {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #d4af37;
+            font-family: monospace;
+        }
+
+        .timeline-year-count {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .timeline-works {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+
+        .timeline-works.expanded {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .timeline-works-content {
+            padding: 1.25rem;
+            padding-top: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .timeline-divider {
+            height: 1px;
+            background-color: #e5e7eb;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-work {
+            display: flex;
+            flex-direction: column;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s;
+        }
+
+        .timeline-work:hover {
+            background-color: rgba(230, 230, 250, 0.2);
+        }
+
+        .timeline-work-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-work-dot {
+            width: 0.375rem;
+            height: 0.375rem;
+            border-radius: 9999px;
+            background-color: #d4af37;
+            flex-shrink: 0;
+        }
+
+        .timeline-work-name {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #333333;
+        }
+
+        .timeline-work-role {
+            color: #6b303b;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+            padding-left: 1.125rem;
+        }
+
+        .timeline-work-details {
+            color: #6b7280;
+            font-size: 0.75rem;
+            padding-left: 1.125rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.125rem;
+        }
+
+        /* Roles Grid */
+        .roles-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .roles-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .role-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            background-color: white;
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s;
+            box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        }
+
+        .role-card:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
+        .role-card-content {
+            padding: 1.5rem;
+        }
+
+        .role-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .role-card-work {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333333;
+        }
+
+        .role-card-role {
+            font-size: 1.25rem;
+            color: #6b303b;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .role-card-desc {
+            color: #4b5563;
+            line-height: 1.625;
+        }
+
+        /* Awards List */
+        .awards-list-detailed {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .award-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background-color: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e5e7eb;
+            transition: background-color 0.3s;
+            box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        }
+
+        .award-item:hover {
+            background-color: rgba(255, 250, 240, 0.3);
+        }
+
+        .award-year {
+            flex-shrink: 0;
+            width: 4rem;
+            height: 4rem;
+            background: linear-gradient(to bottom right, #d4af37, #6b303b);
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
+        .award-info h4 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #333333;
+            margin: 0 0 0.25rem 0;
+        }
+
+        .award-info p {
+            color: #6b7280;
+            margin: 0;
+        }
+
+        /* Infographic */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .stat-card {
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            text-align: center;
+            box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        }
+
+        .stat-card.gold {
+            background: linear-gradient(to bottom right, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .stat-card.burgundy {
+            background: linear-gradient(to bottom right, rgba(107, 48, 59, 0.1), rgba(107, 48, 59, 0.05));
+            border: 1px solid rgba(107, 48, 59, 0.2);
+        }
+
+        .stat-value {
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card.gold .stat-value {
+            color: #d4af37;
+        }
+
+        .stat-card.burgundy .stat-value {
+            color: #6b303b;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #4b5563;
+        }
+
+        .info-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            margin-bottom: 2rem;
+        }
+
+        .info-card-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-card-title h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #333333;
+            margin: 0;
+        }
+
+        .info-card-title .icon {
+            color: #d4af37;
+        }
+
+        .ranking-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .ranking-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .ranking-number {
+            flex-shrink: 0;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+
+        .ranking-number.gold {
+            background-color: #d4af37;
+        }
+
+        .ranking-number.burgundy {
+            background-color: #6b303b;
+        }
+
+        .ranking-content {
+            flex: 1;
+        }
+
+        .ranking-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.25rem;
+        }
+
+        .ranking-title {
+            font-weight: 600;
+            color: #333333;
+        }
+
+        .ranking-count {
+            color: #6b303b;
+            font-weight: 700;
+        }
+
+        .ranking-bar {
+            width: 100%;
+            background-color: #e5e7eb;
+            border-radius: 9999px;
+            height: 0.5rem;
+            overflow: hidden;
+        }
+
+        .ranking-bar-fill {
+            height: 0.5rem;
+            border-radius: 9999px;
+            transition: width 0.5s;
+        }
+
+        .ranking-bar-fill.gold-burgundy {
+            background: linear-gradient(to right, #d4af37, #6b303b);
+        }
+
+        .ranking-bar-fill.burgundy-gold {
+            background: linear-gradient(to right, #6b303b, #d4af37);
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .highlights-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .highlight-item {
+            background-color: rgba(255, 255, 255, 0.6);
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .highlight-label {
+            color: #6b303b;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .highlight-value {
+            color: #333333;
         }
     </style>
 </head>
@@ -399,6 +780,7 @@
 
     <script src="profile-info.js"></script>
     <script src="script.js"></script>
+    <script src="mobile-nav.js"></script>
 </body>
 
 </html>

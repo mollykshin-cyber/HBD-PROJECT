@@ -322,11 +322,6 @@
         <div class="container">
             <nav>
                 <a href="index.html" class="logo">SHIN YOUNG SOOK</a>
-                <button class="mobile-menu-toggle" aria-label="Toggle navigation">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="profile.html">Profile</a></li>
@@ -464,7 +459,7 @@
                                         ${boxState[i] ? html`
                                             <div className="w-full h-full flex items-center justify-center bg-pastel-pink/20">
                                                 <span className="text-6xl animate-bounce">
-                                                    ${gameRewards[i]?.type === 'BAD' ? '🤪' : '💖'}
+                                                    ${gameRewards[i]?.type === 'BAD' ? '🤪' : (gameRewards[i]?.type === 'GOOD' ? '🍰' : '🎬')}
                                                 </span>
                                             </div>
                                         ` : html`
@@ -548,20 +543,7 @@
 
         ReactDOM.createRoot(document.getElementById('root')).render(html`<${App} />`);
     </script>
-    <script>
-        // Mobile Navigation Logic
-        document.addEventListener('DOMContentLoaded', () => {
-            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-            const navLinks = document.querySelector('.nav-links');
-
-            if (mobileMenuToggle && navLinks) {
-                mobileMenuToggle.addEventListener('click', () => {
-                    mobileMenuToggle.classList.toggle('active');
-                    navLinks.classList.toggle('active');
-                });
-            }
-        });
-    </script>
+    <script src="mobile-nav.js"></script>
 </body>
 
 </html>
