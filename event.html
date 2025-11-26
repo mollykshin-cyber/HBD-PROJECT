@@ -278,6 +278,37 @@
                 white-space: nowrap;
             }
 
+            /* Mobile Navigation Fixes */
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: #ffffff;
+                flex-direction: column;
+                padding: 80px 2rem 2rem 2rem !important;
+                /* Force padding */
+                gap: 1.5rem;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 9998;
+                display: flex;
+                /* Ensure flex is kept */
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.5rem;
+                padding: 1rem 0;
+                border-bottom: 1px solid #e0e0e0;
+                width: 100%;
+                /* Full width for border */
+            }
+
             /* Ensure bottom content is not cut off */
             section.scrapbook-bg {
                 padding-bottom: 150px !important;
@@ -338,7 +369,7 @@
                 const REWARDS_SOURCE = [
                     { type: 'BAD', text: '꽝ㅋ▽ㅋ', sub: '하지만 별님들의 사랑은 당첨~!', mediaType: 'image', src: 'assets/bad_reward.jpg' },
                     { type: 'GOOD', text: '♥햅삐영숙데이♥', sub: '357살까지 만수무강 하세요★', mediaType: 'image', src: 'assets/reward2.jpg' },
-                    { type: 'VIDEO', text: '뮤지컬 신의 등장', sub: '뮤지컬 신의 탄생신화를 야심차게 만들어 보고자 했으나 실패...', mediaType: 'video', src: 'assets/ai_reward.mp4' }
+                    { type: 'VIDEO', text: '뮤지컬 신의 등장✨', sub: '뮤지컬 신의 탄생 신화를 야심차게 만들어 보고자 했으나 실패...', mediaType: 'video', src: 'assets/ai_reward.mp4' }
                 ];
                 setGameRewards([...REWARDS_SOURCE].sort(() => Math.random() - 0.5));
             }, []);
