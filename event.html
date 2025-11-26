@@ -394,7 +394,14 @@
                     { type: 'GOOD', text: '♥️햅삐영숙데이♥️', sub: '357살까지 만수무강 하세요★', mediaType: 'image', src: 'assets/reward2.jpg' },
                     { type: 'VIDEO', text: '뮤지컬 신의 등장✨', sub: '뮤지컬 신의 탄생 신화를 야심차게 만들어 보고자 했으나 실패... (ft. AI)', mediaType: 'video', src: 'assets/ai_reward.mp4' }
                 ];
-                setGameRewards([...REWARDS_SOURCE].sort(() => Math.random() - 0.5));
+
+                // Fisher-Yates Shuffle
+                const shuffled = [...REWARDS_SOURCE];
+                for (let i = shuffled.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+                }
+                setGameRewards(shuffled);
             }, []);
 
             const handleBoxClick = (i) => {
